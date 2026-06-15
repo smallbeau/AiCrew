@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>短视频矩阵 · AiCrew</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <style>
+    .task-actions { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; align-items: center; }
+    .batch-bar { display: flex; gap: 10px; align-items: center; padding: 12px 16px; background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.2); border-radius: var(--radius-sm); margin-bottom: 20px; flex-wrap: wrap; }
+    .batch-bar .count { color: var(--accent-1); font-weight: 700; }
+    .section-title { font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--text-primary);display:flex;align-items:center;gap:8px; }
+    .section-title .dot { width:4px;height:16px;border-radius:2px;background:var(--gradient-neon);display:inline-block; }
+    .status-tag { font-size:0.75rem;padding:2px 8px;border-radius:12px;display:inline-block; }
+    @media (max-width:768px) {
+      .task-actions { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <nav class="sidebar">
+    <div class="sidebar-logo">✦ AiCrew</div>
+    <div class="nav-section">
+      <div class="nav-label">首页</div>
+      <a href="dashboard.html" class="nav-item"><span class="icon">📊</span>数据总览</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">AI创作</div>
+      <a href="short-video.html" class="nav-item active"><span class="icon">🎬</span>短视频矩阵</a>
+      <a href="multi-scene.html" class="nav-item"><span class="icon">🎞️</span>多场景剪辑</a>
+      <a href="avatar-custom.html" class="nav-item"><span class="icon">🎨</span>形象定制</a>
+      <a href="digital-human.html" class="nav-item"><span class="icon">🤖</span>数字人精剪</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">AI拓客</div>
+      <a href="smart-acquire.html" class="nav-item"><span class="icon">🎯</span>智能获客</a>
+      <a href="map-acquire.html" class="nav-item"><span class="icon">🗺️</span>地图获客</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">AI个微</div>
+      <a href="personal-chat.html" class="nav-item"><span class="icon">💬</span>聚合聊天</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">AI企微</div>
+      <a href="wecom-chat.html" class="nav-item"><span class="icon">🏢</span>聚合聊天</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">AI人事</div>
+      <a href="boss-manage.html" class="nav-item"><span class="icon">👔</span>Boss管理</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">算力中心</div>
+      <a href="compute-center.html" class="nav-item"><span class="icon">⚡</span>算力消耗</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">系统</div>
+      <a href="settings.html" class="nav-item"><span class="icon">⚙️</span>系统设置</a>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="page-header">
+      <h1 class="page-title animate-in">🎬 短视频矩阵</h1>
+      <div>
+        <button class="btn btn-secondary">📋 导出报表</button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid animate-in animate-delay-1">
+      <div class="stat-card">
+        <div class="icon" style="background:rgba(0,212,255,0.1);color:var(--neon-blue);">⏳</div>
+        <div class="value">8</div>
+        <div class="label">进行中</div>
+      </div>
+      <div class="stat-card">
+        <div class="icon" style="background:rgba(16,185,129,0.1);color:#10b981;">✅</div>
+        <div class="value">124</div>
+        <div class="label">已完成 <span style="font-size:0.75rem;color:var(--text-muted);">本月</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="icon" style="background:rgba(245,158,11,0.1);color:#f59e0b;">📋</div>
+        <div class="value">3</div>
+        <div class="label">待处理</div>
+      </div>
+      <div class="stat-card">
+        <div class="icon" style="background:rgba(168,85,247,0.1);color:#a855f7;">📊</div>
+        <div class="value">1.2M</div>
+        <div class="label">总播放量</div>
+        <span class="trend trend-up">↑ 28.6%</span>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="task-actions animate-in animate-delay-2">
+      <button class="btn btn-primary">➕ 创建任务</button>
+      <button class="btn btn-secondary">📥 导入视频</button>
+      <button class="btn btn-secondary" style="color:var(--neon-blue);border-color:var(--neon-blue);">⚡ 批量发布</button>
+    </div>
+
+    <!-- Batch Operations -->
+    <div class="batch-bar animate-in animate-delay-2">
+      <input type="checkbox" id="selectAll" style="accent-color:var(--accent-1);width:16px;height:16px;">
+      <label for="selectAll" style="color:var(--text-secondary);font-size:0.85rem;">全选</label>
+      <span style="color:var(--text-muted);">|</span>
+      <span style="font-size:0.85rem;color:var(--text-secondary);">已选 <span class="count">0</span> 项</span>
+      <button class="btn btn-secondary" style="padding:6px 14px;font-size:0.8rem;">🗑️ 删除</button>
+      <button class="btn btn-secondary" style="padding:6px 14px;font-size:0.8rem;">📤 发布</button>
+      <button class="btn btn-secondary" style="padding:6px 14px;font-size:0.8rem;">📊 分析</button>
+    </div>
+
+    <!-- Task List -->
+    <div class="glass-card animate-in animate-delay-3">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:32px;"><input type="checkbox" style="accent-color:var(--accent-1);"></th>
+            <th>任务名</th>
+            <th>平台</th>
+            <th>状态</th>
+            <th>播放量</th>
+            <th>点赞</th>
+            <th>创建时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--accent-1);"></td>
+            <td>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="width:36px;height:36px;border-radius:8px;background:var(--gradient-1);display:flex;align-items:center;justify-content:center;font-size:0.8rem;">V1</span>
+                <div>
+                  <div style="font-weight:600;">产品宣传片 #0321</div>
+                  <div style="font-size:0.75rem;color:var(--text-muted);">时长 45s</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="badge badge-info">抖音</span></td>
+            <td><span class="badge badge-success">已完成</span></td>
+            <td style="font-family:'JetBrains Mono',monospace;">12.5K</td>
+            <td style="font-family:'JetBrains Mono',monospace;">856</td>
+            <td style="color:var(--text-muted);font-size:0.8rem;">06-14</td>
+            <td><button class="btn btn-secondary" style="padding:4px 10px;">查看</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--accent-1);"></td>
+            <td>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="width:36px;height:36px;border-radius:8px;background:var(--gradient-2);display:flex;align-items:center;justify-content:center;font-size:0.8rem;">V2</span>
+                <div>
+                  <div style="font-weight:600;">新品发布预热</div>
+                  <div style="font-size:0.75rem;color:var(--text-muted);">时长 30s</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="badge badge-purple">快手</span></td>
+            <td><span class="badge badge-warning">进行中</span></td>
+            <td style="font-family:'JetBrains Mono',monospace;">3.2K</td>
+            <td style="font-family:'JetBrains Mono',monospace;">234</td>
+            <td style="color:var(--text-muted);font-size:0.8rem;">06-14</td>
+            <td><button class="btn btn-secondary" style="padding:4px 10px;">查看</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--accent-1);"></td>
+            <td>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="width:36px;height:36px;border-radius:8px;background:var(--neon-blue);display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:#000;">V3</span>
+                <div>
+                  <div style="font-weight:600;">客户见证合集</div>
+                  <div style="font-size:0.75rem;color:var(--text-muted);">时长 60s</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="badge badge-info">小红书</span></td>
+            <td><span class="badge badge-info">待处理</span></td>
+            <td style="font-family:'JetBrains Mono',monospace;">—</td>
+            <td style="font-family:'JetBrains Mono',monospace;">—</td>
+            <td style="color:var(--text-muted);font-size:0.8rem;">06-13</td>
+            <td><button class="btn btn-secondary" style="padding:4px 10px;">查看</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--accent-1);"></td>
+            <td>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="width:36px;height:36px;border-radius:8px;background:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:#000;">V4</span>
+                <div>
+                  <div style="font-weight:600;">行业干货分享</div>
+                  <div style="font-size:0.75rem;color:var(--text-muted);">时长 90s</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="badge badge-purple">微信视频号</span></td>
+            <td><span class="badge badge-success">已完成</span></td>
+            <td style="font-family:'JetBrains Mono',monospace;">8.7K</td>
+            <td style="font-family:'JetBrains Mono',monospace;">423</td>
+            <td style="color:var(--text-muted);font-size:0.8rem;">06-12</td>
+            <td><button class="btn btn-secondary" style="padding:4px 10px;">查看</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--accent-1);"></td>
+            <td>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="width:36px;height:36px;border-radius:8px;background:var(--neon-purple);display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:#000;">V5</span>
+                <div>
+                  <div style="font-weight:600;">活动花絮剪辑</div>
+                  <div style="font-size:0.75rem;color:var(--text-muted);">时长 120s</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="badge badge-info">抖音</span></td>
+            <td><span class="badge badge-warning">进行中</span></td>
+            <td style="font-family:'JetBrains Mono',monospace;">1.5K</td>
+            <td style="font-family:'JetBrains Mono',monospace;">98</td>
+            <td style="color:var(--text-muted);font-size:0.8rem;">06-11</td>
+            <td><button class="btn btn-secondary" style="padding:4px 10px;">查看</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<script src="../js/app.js"></script>
+</body>
+</html>

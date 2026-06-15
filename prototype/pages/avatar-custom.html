@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AiCrew - 形象定制</title>
+<link rel="stylesheet" href="../css/theme.css">
+<style>
+.layout{display:flex;gap:24px;flex-wrap:wrap}
+.preview-zone{flex:1.2;min-width:320px}
+.preview-box{background:rgba(255,255,255,0.03);border:2px dashed rgba(255,255,255,0.08);border-radius:var(--radius);height:420px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+.preview-box .placeholder{font-size:4rem;opacity:0.3}
+.preview-box p{color:var(--text-muted);font-size:0.875rem}
+.settings-zone{flex:0.8;min-width:280px;display:flex;flex-direction:column;gap:16px}
+.setting-group{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:16px}
+.setting-group h4{font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px}
+.style-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.style-opt{height:48px;border-radius:var(--radius-xs);border:2px solid transparent;cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--text-secondary)}
+.style-opt:hover,.style-opt.active{border-color:var(--accent-1);box-shadow:0 0 12px rgba(99,102,241,0.3)}
+.bg-options{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.bg-opt{height:36px;border-radius:var(--radius-xs);border:2px solid transparent;cursor:pointer;transition:var(--transition)}
+.bg-opt:hover,.bg-opt.active{border-color:var(--accent-3)}
+.history-grid{display:flex;gap:12px;overflow-x:auto;padding:8px 0}
+.history-thumb{width:80px;height:80px;border-radius:var(--radius-xs);background:rgba(255,255,255,0.03);border:2px solid var(--border-glass);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--text-muted);cursor:pointer;transition:var(--transition)}
+.history-thumb:hover{border-color:var(--accent-1)}
+.slider-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.slider-row label{font-size:0.8rem;color:var(--text-secondary);width:60px}
+.slider-row input[type=range]{flex:1;accent-color:var(--accent-1)}
+.slider-row span{font-size:0.75rem;color:var(--text-muted);width:36px;text-align:right;font-family:'JetBrains Mono',monospace}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="app">
+<aside class="sidebar">
+  <div class="sidebar-logo">⚡ AiCrew</div>
+  <nav>
+    <div class="nav-section"><div class="nav-label">首页</div><a class="nav-item" href="dashboard.html"><span class="icon">📊</span>数据总览</a></div>
+    <div class="nav-section"><div class="nav-label">AI创作</div><a class="nav-item" href="short-video.html"><span class="icon">🎬</span>短视频矩阵</a><a class="nav-item" href="multi-scene.html"><span class="icon">✂️</span>多场景剪辑</a><a class="nav-item active" href="avatar-custom.html"><span class="icon">👤</span>形象定制</a><a class="nav-item" href="digital-human.html"><span class="icon">🤖</span>数字人精剪</a></div>
+    <div class="nav-section"><div class="nav-label">AI拓客</div><a class="nav-item" href="smart-acquire.html"><span class="icon">🎯</span>智能获客</a><a class="nav-item" href="map-acquire.html"><span class="icon">🗺️</span>地图获客</a></div>
+    <div class="nav-section"><div class="nav-label">AI个微</div><a class="nav-item" href="personal-chat.html"><span class="icon">💬</span>聚合聊天</a></div>
+    <div class="nav-section"><div class="nav-label">AI企微</div><a class="nav-item" href="wecom-chat.html"><span class="icon">🏢</span>聚合聊天</a></div>
+    <div class="nav-section"><div class="nav-label">AI人事</div><a class="nav-item" href="boss-manage.html"><span class="icon">👔</span>Boss管理</a></div>
+    <div class="nav-section"><div class="nav-label">算力中心</div><a class="nav-item" href="compute-center.html"><span class="icon">⚡</span>算力消耗</a></div>
+    <div class="nav-section"><div class="nav-label">系统</div><a class="nav-item" href="settings.html"><span class="icon">⚙️</span>系统设置</a></div>
+  </nav>
+</aside>
+<main class="main-content">
+  <div class="page-header"><h1 class="page-title">👤 形象定制</h1><div style="display:flex;gap:12px"><button class="btn btn-secondary">📂 历史形象</button><button class="btn btn-primary">✨ 开始定制</button></div></div>
+  <div class="layout">
+    <div class="preview-zone">
+      <div class="preview-box animate-in">
+        <div class="placeholder">🧑</div>
+        <p>点击上传形象照片或选择预设模板</p>
+        <button class="btn btn-neon">📤 上传照片</button>
+      </div>
+    </div>
+    <div class="settings-zone animate-in animate-delay-1">
+      <div class="setting-group"><h4>🎨 风格选择</h4>
+        <div class="style-options">
+          <div class="style-opt active" style="background:linear-gradient(135deg,#667eea,#764ba2)">商务</div>
+          <div class="style-opt" style="background:linear-gradient(135deg,#f093fb,#f5576c)">时尚</div>
+          <div class="style-opt" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">科技</div>
+          <div class="style-opt" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">清新</div>
+          <div class="style-opt" style="background:linear-gradient(135deg,#fa709a,#fee140)">活力</div>
+          <div class="style-opt" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)">文艺</div>
+        </div>
+      </div>
+      <div class="setting-group"><h4>🖼️ 背景设置</h4>
+        <div class="bg-options">
+          <div class="bg-opt active" style="background:#1a1a2e"></div>
+          <div class="bg-opt" style="background:linear-gradient(135deg,#0f3460,#16213e)"></div>
+          <div class="bg-opt" style="background:linear-gradient(135deg,#2d1b69,#11998e)"></div>
+          <div class="bg-opt" style="background:linear-gradient(135deg,#e44d26,#f16529)"></div>
+        </div>
+      </div>
+      <div class="setting-group"><h4>🔧 参数调整</h4>
+        <div class="slider-row"><label>亮度</label><input type="range" min="0" max="100" value="75"><span>75%</span></div>
+        <div class="slider-row"><label>对比度</label><input type="range" min="0" max="100" value="60"><span>60%</span></div>
+        <div class="slider-row"><label>饱和度</label><input type="range" min="0" max="100" value="80"><span>80%</span></div>
+        <div class="slider-row"><label>锐度</label><input type="range" min="0" max="100" value="50"><span>50%</span></div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center">🚀 生成形象</button>
+    </div>
+  </div>
+  <div style="margin-top:24px">
+    <h3 style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:12px">📋 历史定制记录</h3>
+    <div class="history-grid">
+      <div class="history-thumb">形象 1</div>
+      <div class="history-thumb">形象 2</div>
+      <div class="history-thumb">形象 3</div>
+      <div class="history-thumb">形象 4</div>
+      <div class="history-thumb">形象 5</div>
+      <div class="history-thumb">+ 新建</div>
+    </div>
+  </div>
+</main>
+</div>
+<script src="../js/app.js"></script>
+</body>
+</html>

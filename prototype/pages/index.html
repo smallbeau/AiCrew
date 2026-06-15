@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AiCrew - 登录</title>
+<link rel="stylesheet" href="../css/theme.css">
+<style>
+body{display:flex;align-items:center;justify-content:center;min-height:100vh;overflow:hidden}
+.login-bg{position:fixed;inset:0;z-index:-1}
+.login-bg .orb{position:absolute;border-radius:50%;filter:blur(80px);animation:orbFloat 15s ease-in-out infinite}
+.orb-1{width:400px;height:400px;background:rgba(99,102,241,0.15);top:-10%;left:-5%;animation-delay:0s}
+.orb-2{width:350px;height:350px;background:rgba(6,182,212,0.12);bottom:-10%;right:-5%;animation-delay:-5s}
+.orb-3{width:250px;height:250px;background:rgba(168,85,247,0.1);top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:-10s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)}25%{transform:translate(30px,-40px)}50%{transform:translate(-20px,30px)}75%{transform:translate(40px,20px)}}
+.login-card{width:420px;max-width:92vw;background:rgba(15,23,42,0.8);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:48px 36px;position:relative;overflow:hidden;animation:fadeInUp 0.6s ease}
+.login-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gradient-neon)}
+.login-logo{text-align:center;margin-bottom:32px}
+.login-logo h1{font-size:2.5rem;font-weight:900;background:var(--gradient-neon);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.03em;margin-bottom:8px}
+.login-logo p{font-size:0.875rem;color:var(--text-secondary)}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px}
+.form-group input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:12px 16px;color:var(--text-primary);font-size:0.9rem;outline:none;transition:var(--transition);font-family:inherit}
+.form-group input:focus{border-color:var(--accent-1);box-shadow:0 0 15px rgba(99,102,241,0.15)}
+.form-group input::placeholder{color:var(--text-muted)}
+.form-options{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.form-options label{display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-secondary);cursor:pointer}
+.form-options label input[type=checkbox]{accent-color:var(--accent-1)}
+.form-options a{font-size:0.8rem;color:var(--accent-3);text-decoration:none}
+.form-options a:hover{text-decoration:underline}
+.login-btn{width:100%;padding:14px;border:none;border-radius:var(--radius-sm);background:var(--gradient-1);color:white;font-size:1rem;font-weight:700;cursor:pointer;transition:var(--transition);font-family:inherit;letter-spacing:0.02em}
+.login-btn:hover{box-shadow:0 8px 30px rgba(99,102,241,0.4);transform:translateY(-2px)}
+.login-btn:active{transform:translateY(0)}
+.divider{text-align:center;margin:24px 0;position:relative}
+.divider::before{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:var(--border-glass)}
+.divider span{position:relative;background:rgba(15,23,42,0.8);padding:0 16px;font-size:0.8rem;color:var(--text-muted)}
+.social-login{display:flex;gap:12px;justify-content:center}
+.social-btn{width:48px;height:48px;border-radius:12px;border:1px solid var(--border-glass);background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;transition:var(--transition)}
+.social-btn:hover{border-color:var(--accent-1);background:rgba(99,102,241,0.1)}
+.login-footer{text-align:center;margin-top:32px;font-size:0.8rem;color:var(--text-muted)}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="login-bg">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+<div class="login-card">
+  <div class="login-logo">
+    <h1>⚡ AiCrew</h1>
+    <p>AI 智能营销获客平台</p>
+  </div>
+  <form onsubmit="return false">
+    <div class="form-group">
+      <label>用户名</label>
+      <input type="text" placeholder="请输入用户名或邮箱">
+    </div>
+    <div class="form-group">
+      <label>密码</label>
+      <input type="password" placeholder="请输入密码">
+    </div>
+    <div class="form-options">
+      <label><input type="checkbox"> 记住登录</label>
+      <a href="#">忘记密码？</a>
+    </div>
+    <button class="login-btn" onclick="location.href='dashboard.html'">登 录</button>
+  </form>
+  <div class="divider"><span>或</span></div>
+  <div class="social-login">
+    <div class="social-btn" title="微信登录">💬</div>
+    <div class="social-btn" title="企业微信登录">🏢</div>
+    <div class="social-btn" title="手机验证码登录">📱</div>
+  </div>
+  <div class="login-footer">© 2026 AiCrew · 智能营销获客平台</div>
+</div>
+<script src="../js/app.js"></script>
+</body>
+</html>

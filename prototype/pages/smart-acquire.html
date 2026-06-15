@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AiCrew - 智能获客</title>
+<link rel="stylesheet" href="../css/theme.css">
+<style>
+.filter-bar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.filter-bar input,.filter-bar select{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-xs);padding:8px 14px;color:var(--text-primary);font-size:0.85rem;outline:none;font-family:inherit}
+.filter-bar input:focus,.filter-bar select:focus{border-color:var(--accent-1)}
+.filter-bar select option{background:var(--bg-secondary)}
+.leads-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:24px}
+.lead-card{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:16px;display:flex;gap:14px;align-items:flex-start;transition:var(--transition);cursor:pointer}
+.lead-card:hover{border-color:var(--accent-1);box-shadow:var(--shadow-glow);transform:translateY(-2px)}
+.lead-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.lead-info{flex:1;min-width:0}
+.lead-info .name{font-weight:600;font-size:0.9rem;margin-bottom:2px}
+.lead-info .source{font-size:0.75rem;color:var(--text-muted);margin-bottom:6px}
+.lead-info .msg{font-size:0.8rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.intent-bar{margin-top:6px;display:flex;align-items:center;gap:8px}
+.intent-bar .bar{flex:1;height:4px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden}
+.intent-bar .fill{height:100%;border-radius:2px}
+.intent-bar .pct{font-size:0.7rem;font-family:'JetBrains Mono',monospace}
+.rules-section{margin-top:24px}
+.rules-table{width:100%;border-collapse:collapse}
+.rules-table th{text-align:left;padding:10px 14px;font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid var(--border-glass)}
+.rules-table td{padding:12px 14px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03)}
+.status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+.status-dot.on{background:#10b981;box-shadow:0 0 6px #10b981}
+.status-dot.off{background:#64748b}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="app">
+<aside class="sidebar">
+  <div class="sidebar-logo">⚡ AiCrew</div>
+  <nav>
+    <div class="nav-section"><div class="nav-label">首页</div><a class="nav-item" href="dashboard.html"><span class="icon">📊</span>数据总览</a></div>
+    <div class="nav-section"><div class="nav-label">AI创作</div><a class="nav-item" href="short-video.html"><span class="icon">🎬</span>短视频矩阵</a><a class="nav-item" href="multi-scene.html"><span class="icon">✂️</span>多场景剪辑</a><a class="nav-item" href="avatar-custom.html"><span class="icon">👤</span>形象定制</a><a class="nav-item" href="digital-human.html"><span class="icon">🤖</span>数字人精剪</a></div>
+    <div class="nav-section"><div class="nav-label">AI拓客</div><a class="nav-item active" href="smart-acquire.html"><span class="icon">🎯</span>智能获客</a><a class="nav-item" href="map-acquire.html"><span class="icon">🗺️</span>地图获客</a></div>
+    <div class="nav-section"><div class="nav-label">AI个微</div><a class="nav-item" href="personal-chat.html"><span class="icon">💬</span>聚合聊天</a></div>
+    <div class="nav-section"><div class="nav-label">AI企微</div><a class="nav-item" href="wecom-chat.html"><span class="icon">🏢</span>聚合聊天</a></div>
+    <div class="nav-section"><div class="nav-label">AI人事</div><a class="nav-item" href="boss-manage.html"><span class="icon">👔</span>Boss管理</a></div>
+    <div class="nav-section"><div class="nav-label">算力中心</div><a class="nav-item" href="compute-center.html"><span class="icon">⚡</span>算力消耗</a></div>
+    <div class="nav-section"><div class="nav-label">系统</div><a class="nav-item" href="settings.html"><span class="icon">⚙️</span>系统设置</a></div>
+  </nav>
+</aside>
+<main class="main-content">
+  <div class="page-header"><h1 class="page-title">🎯 智能获客</h1><button class="btn btn-primary">➕ 新建获客规则</button></div>
+  <div class="stats-grid animate-in">
+    <div class="stat-card"><div class="icon" style="background:rgba(99,102,241,0.15);color:var(--accent-1)">📥</div><div class="value" style="color:var(--accent-1)">128</div><div class="label">今日线索</div><div class="trend trend-up">↑ 23%</div></div>
+    <div class="stat-card"><div class="icon" style="background:rgba(16,185,129,0.15);color:var(--accent-4)">🔥</div><div class="value" style="color:var(--accent-4)">847</div><div class="label">本周线索</div><div class="trend trend-up">↑ 18%</div></div>
+    <div class="stat-card"><div class="icon" style="background:rgba(245,158,11,0.15);color:var(--accent-5)">💰</div><div class="value" style="color:var(--accent-5)">3,256</div><div class="label">本月线索</div><div class="trend trend-up">↑ 31%</div></div>
+    <div class="stat-card"><div class="icon" style="background:rgba(6,182,212,0.15);color:var(--accent-3)">📊</div><div class="value" style="color:var(--accent-3)">68%</div><div class="label">转化率</div><div class="trend trend-up">↑ 5%</div></div>
+  </div>
+  <div class="glass-card animate-in animate-delay-1">
+    <h3 style="font-size:0.9rem;margin-bottom:16px">🔍 筛选</h3>
+    <div class="filter-bar">
+      <input type="text" placeholder="搜索昵称/手机号..." style="width:200px">
+      <select><option>全部平台</option><option>抖音</option><option>小红书</option><option>快手</option></select>
+      <select><option>全部意向</option><option>高意向</option><option>中意向</option><option>低意向</option></select>
+      <select><option>全部时间</option><option>今天</option><option>本周</option><option>本月</option></select>
+    </div>
+    <h3 style="font-size:0.9rem;margin-bottom:16px">👥 最新线索</h3>
+    <div class="leads-grid">
+      <div class="lead-card"><div class="lead-avatar" style="background:rgba(255,0,80,0.15)">📕</div><div class="lead-info"><div class="name">小红薯用户A</div><div class="source">小红书 · 评论获客 · 3分钟前</div><div class="msg">"这个怎么卖？想了解一下价格"</div><div class="intent-bar"><div class="bar"><div class="fill" style="width:92%;background:var(--gradient-2)"></div></div><span class="pct" style="color:var(--accent-4)">92%</span></div></div></div>
+      <div class="lead-card"><div class="lead-avatar" style="background:rgba(0,0,0,0.3)">🎵</div><div class="lead-info"><div class="name">抖音达人小王</div><div class="source">抖音 · 私信获客 · 15分钟前</div><div class="msg">"看了你们的视频，很有兴趣合作"</div><div class="intent-bar"><div class="bar"><div class="fill" style="width:85%;background:var(--gradient-1)"></div></div><span class="pct" style="color:var(--accent-1)">85%</span></div></div></div>
+      <div class="lead-card"><div class="lead-avatar" style="background:rgba(255,100,0,0.15)">🎬</div><div class="lead-info"><div class="name">快手老铁666</div><div class="source">快手 · 评论获客 · 28分钟前</div><div class="msg">"多少钱？在哪个城市？"</div><div class="intent-bar"><div class="bar"><div class="fill" style="width:78%;background:var(--gradient-3)"></div></div><span class="pct" style="color:var(--accent-5)">78%</span></div></div></div>
+      <div class="lead-card"><div class="lead-avatar" style="background:rgba(255,0,80,0.15)">📕</div><div class="lead-info"><div class="name">宝妈创业记</div><div class="source">小红书 · 关键词获客 · 1小时前</div><div class="msg">"请问有加盟政策吗？"</div><div class="intent-bar"><div class="bar"><div class="fill" style="width:88%;background:var(--gradient-2)"></div></div><span class="pct" style="color:var(--accent-4)">88%</span></div></div></div>
+      <div class="lead-card"><div class="lead-avatar" style="background:rgba(0,0,0,0.3)">🎵</div><div class="lead-info"><div class="name">创业小白李</div><div class="source">抖音 · 直播间获客 · 2小时前</div><div class="msg">"刚关注了你们，怎么联系？"</div><div class="intent-bar"><div class="bar"><div class="fill" style="width:70%;background:var(--gradient-1)"></div></div><span class="pct" style="color:var(--accent-1)">70%</span></div></div></div>
+      <div class="lead-card"><div class="lead-avatar" style="background:rgba(255,100,0,0.15)">🎬</div><div class="lead-info"><div class="name">电商运营张</div><div class="source">快手 · 关键词获客 · 3小时前</div><div class="msg">"私聊一下，想了解代理"</div><div class="intent-bar"><div class="bar"><div class="fill" style="width:82%;background:var(--gradient-3)"></div></div><span class="pct" style="color:var(--accent-5)">82%</span></div></div></div>
+    </div>
+  </div>
+  <div class="glass-card animate-in animate-delay-2 rules-section">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h3 style="font-size:0.9rem">⚙️ 获客规则</h3><button class="btn btn-secondary" style="padding:6px 14px;font-size:0.8rem">➕ 新建规则</button></div>
+    <table class="rules-table">
+      <thead><tr><th>规则名称</th><th>平台</th><th>类型</th><th>状态</th><th>今日获客</th><th>操作</th></tr></thead>
+      <tbody>
+        <tr><td>教育行业关键词</td><td><span class="badge badge-info">抖音</span></td><td>关键词获客</td><td><span class="status-dot on"></span>运行中</td><td style="font-family:'JetBrains Mono',monospace">42</td><td><button class="btn btn-secondary" style="padding:4px 10px;font-size:0.75rem">编辑</button></td></tr>
+        <tr><td>竞品评论区抓取</td><td><span class="badge badge-purple">小红书</span></td><td>评论获客</td><td><span class="status-dot on"></span>运行中</td><td style="font-family:'JetBrains Mono',monospace">35</td><td><button class="btn btn-secondary" style="padding:4px 10px;font-size:0.75rem">编辑</button></td></tr>
+        <tr><td>直播间接粉</td><td><span class="badge badge-warning">快手</span></td><td>直播间获客</td><td><span class="status-dot on"></span>运行中</td><td style="font-family:'JetBrains Mono',monospace">28</td><td><button class="btn btn-secondary" style="padding:4px 10px;font-size:0.75rem">编辑</button></td></tr>
+        <tr><td>私信自动回复</td><td><span class="badge badge-info">抖音</span></td><td>私信获客</td><td><span class="status-dot off"></span>已暂停</td><td style="font-family:'JetBrains Mono',monospace">23</td><td><button class="btn btn-secondary" style="padding:4px 10px;font-size:0.75rem">编辑</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</div>
+<script src="../js/app.js"></script>
+</body>
+</html>

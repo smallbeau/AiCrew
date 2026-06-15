@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>系统设置 · AiCrew</title>
+<link rel="stylesheet" href="../css/theme.css">
+<style>
+.settings-layout{display:flex;gap:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border-glass);min-height:500px}
+.settings-menu{width:220px;background:rgba(15,23,42,0.95);border-right:1px solid var(--border-glass);padding:16px 0;flex-shrink:0}
+.settings-menu-item{display:flex;align-items:center;gap:10px;padding:12px 20px;cursor:pointer;transition:var(--transition);color:var(--text-secondary);font-size:0.85rem;font-weight:500;border:none;background:none;width:100%;text-align:left;font-family:inherit}
+.settings-menu-item:hover{background:rgba(99,102,241,0.08);color:var(--text-primary)}
+.settings-menu-item.active{background:rgba(99,102,241,0.15);color:var(--accent-1);font-weight:600;border-right:2px solid var(--accent-1)}
+.settings-content{flex:1;padding:28px 32px;background:var(--bg-primary);overflow-y:auto}
+.setting-section{display:none}
+.setting-section.active{display:block}
+.setting-section h2{font-size:1.2rem;font-weight:700;margin-bottom:4px}
+.setting-section .desc{font-size:0.8rem;color:var(--text-secondary);margin-bottom:24px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:6px}
+.form-group input[type="text"],.form-group input[type="email"],.form-group input[type="password"],.form-group input[type="tel"]{width:100%;max-width:420px;background:rgba(255,255,255,0.05);border:1px solid var(--border-glass);border-radius:var(--radius-xs);padding:10px 14px;color:var(--text-primary);font-size:0.85rem;outline:none;transition:var(--transition);font-family:inherit}
+.form-group input:focus{border-color:var(--accent-1);box-shadow:0 0 10px rgba(99,102,241,0.2)}
+.form-row{display:flex;gap:16px;align-items:flex-end}
+.switch-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.switch-row:last-child{border-bottom:none}
+.switch-row .info{flex:1}
+.switch-row .info .title{font-size:0.9rem;font-weight:500}
+.switch-row .info .sub{font-size:0.75rem;color:var(--text-muted);margin-top:2px}
+.toggle{position:relative;width:44px;height:24px;background:rgba(255,255,255,0.1);border-radius:12px;cursor:pointer;transition:var(--transition);flex-shrink:0}
+.toggle.active{background:var(--accent-1)}
+.toggle::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:var(--transition)}
+.toggle.active::after{left:22px}
+.about-info{max-width:500px}
+.about-info .version{font-size:2rem;font-weight:900;font-family:'JetBrains Mono',monospace;background:var(--gradient-neon);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.about-info .update-log{background:rgba(255,255,255,0.02);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:16px;margin:16px 0}
+.about-info .update-log h4{margin-bottom:8px;font-size:0.85rem}
+.about-info .update-log li{font-size:0.8rem;color:var(--text-secondary);padding:4px 0;list-style:none}
+.about-info .update-log li::before{content:"✦ ";color:var(--neon-blue)}
+@media (max-width:768px){.settings-layout{flex-direction:column}.settings-menu{width:100%;border-right:none;border-bottom:1px solid var(--border-glass);display:flex;overflow-x:auto;padding:0}.settings-menu-item{white-space:nowrap;padding:12px 16px;border-bottom:2px solid transparent}.settings-menu-item.active{border-right:none;border-bottom-color:var(--accent-1)}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="sidebar-logo">✦ AiCrew</div>
+  <nav>
+    <div class="nav-section"><div class="nav-label">首页</div><a class="nav-item" href="dashboard.html"><span class="icon">📊</span>数据总览</a></div>
+    <div class="nav-section"><div class="nav-label">AI创作</div><a class="nav-item" href="short-video.html"><span class="icon">🎬</span>短视频矩阵</a><a class="nav-item" href="multi-scene.html"><span class="icon">🎞️</span>多场景剪辑</a><a class="nav-item" href="avatar-custom.html"><span class="icon">🎨</span>形象定制</a><a class="nav-item" href="digital-human.html"><span class="icon">🤖</span>数字人精剪</a></div>
+    <div class="nav-section"><div class="nav-label">AI拓客</div><a class="nav-item" href="smart-acquire.html"><span class="icon">🎯</span>智能获客</a><a class="nav-item" href="map-acquire.html"><span class="icon">🗺️</span>地图获客</a></div>
+    <div class="nav-section"><div class="nav-label">AI个微</div><a class="nav-item" href="personal-chat.html"><span class="icon">💬</span>聚合聊天</a></div>
+    <div class="nav-section"><div class="nav-label">AI企微</div><a class="nav-item" href="wecom-chat.html"><span class="icon">🏢</span>聚合聊天</a></div>
+    <div class="nav-section"><div class="nav-label">AI人事</div><a class="nav-item" href="boss-manage.html"><span class="icon">👔</span>Boss管理</a></div>
+    <div class="nav-section"><div class="nav-label">算力中心</div><a class="nav-item" href="compute-center.html"><span class="icon">⚡</span>算力消耗</a></div>
+    <div class="nav-section"><div class="nav-label">系统</div><a class="nav-item active" href="settings.html"><span class="icon">⚙️</span>系统设置</a></div>
+  </nav>
+</aside>
+<main class="main-content" style="padding:16px 24px">
+  <div class="page-header">
+    <h1 class="page-title">⚙️ 系统设置</h1>
+  </div>
+  <div class="settings-layout animate-in">
+    <!-- 左侧设置菜单 -->
+    <div class="settings-menu">
+      <button class="settings-menu-item active" data-tab="account"><span>👤</span>账号设置</button>
+      <button class="settings-menu-item" data-tab="api"><span>🔌</span>API配置</button>
+      <button class="settings-menu-item" data-tab="notify"><span>🔔</span>通知设置</button>
+      <button class="settings-menu-item" data-tab="about"><span>ℹ️</span>关于</button>
+    </div>
+
+    <!-- 右侧设置表单 -->
+    <div class="settings-content">
+      <!-- 账号设置 -->
+      <div class="setting-section active" id="tab-account">
+        <h2>👤 账号设置</h2>
+        <div class="desc">管理你的账号信息和密码</div>
+        <div class="form-group">
+          <label>用户名</label>
+          <input type="text" value="AiCrewAdmin" placeholder="请输入用户名">
+        </div>
+        <div class="form-group">
+          <label>邮箱</label>
+          <input type="email" value="admin@aicrew.com" placeholder="请输入邮箱地址">
+        </div>
+        <div class="form-group">
+          <label>手机号</label>
+          <input type="tel" value="138****8888" placeholder="请输入手机号">
+        </div>
+        <div class="form-group">
+          <label>密码</label>
+          <div class="form-row">
+            <input type="password" value="········" placeholder="新密码" style="max-width:200px">
+            <input type="password" value="········" placeholder="确认新密码" style="max-width:200px">
+            <button class="btn btn-secondary">修改密码</button>
+          </div>
+        </div>
+        <div style="margin-top:24px">
+          <button class="btn btn-primary">💾 保存设置</button>
+        </div>
+      </div>
+
+      <!-- API配置 -->
+      <div class="setting-section" id="tab-api">
+        <h2>🔌 API配置</h2>
+        <div class="desc">配置API接口以对接外部系统</div>
+        <div class="form-group">
+          <label>API地址</label>
+          <input type="text" value="https://api.aicrew.com/v2" placeholder="请输入API地址">
+        </div>
+        <div class="form-group">
+          <label>API Key</label>
+          <input type="text" value="sk-aicrew-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" placeholder="请输入API Key">
+        </div>
+        <div class="form-group">
+          <label>Secret Key</label>
+          <input type="password" value="················" placeholder="请输入Secret Key">
+        </div>
+        <div class="form-group">
+          <span class="badge badge-success" style="margin-right:8px">● 已连接</span>
+          <span style="font-size:0.8rem;color:var(--text-secondary)">上次连接成功：2026-06-15 12:00:00</span>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:10px">
+          <button class="btn btn-primary">🔗 测试连接</button>
+          <button class="btn btn-secondary">💾 保存配置</button>
+        </div>
+      </div>
+
+      <!-- 通知设置 -->
+      <div class="setting-section" id="tab-notify">
+        <h2>🔔 通知设置</h2>
+        <div class="desc">管理你收到的通知类型和方式</div>
+        <div class="switch-row">
+          <div class="info"><div class="title">📨 新线索通知</div><div class="sub">当有新的获客线索时发送通知</div></div>
+          <div class="toggle active"></div>
+        </div>
+        <div class="switch-row">
+          <div class="info"><div class="title">🔧 系统更新</div><div class="sub">平台版本更新和功能上线通知</div></div>
+          <div class="toggle active"></div>
+        </div>
+        <div class="switch-row">
+          <div class="info"><div class="title">⚡ 算力不足提醒</div><div class="sub">当日算力消耗达80%时发送提醒</div></div>
+          <div class="toggle active"></div>
+        </div>
+        <div class="switch-row">
+          <div class="info"><div class="title">📊 数据周报</div><div class="sub">每周一发送上周数据汇总报告</div></div>
+          <div class="toggle"></div>
+        </div>
+        <div class="switch-row">
+          <div class="info"><div class="title">🤖 AI助手建议</div><div class="sub">AI主动推送的运营建议通知</div></div>
+          <div class="toggle active"></div>
+        </div>
+        <div style="margin-top:20px">
+          <button class="btn btn-primary">💾 保存设置</button>
+        </div>
+      </div>
+
+      <!-- 关于 -->
+      <div class="setting-section" id="tab-about">
+        <h2>ℹ️ 关于</h2>
+        <div class="desc">了解当前平台版本信息</div>
+        <div class="about-info">
+          <div class="version">v2.0.0</div>
+          <div style="color:var(--text-secondary);font-size:0.85rem">AiCrew AI智能营销获客平台</div>
+          <div class="update-log">
+            <h4>📋 更新日志</h4>
+            <ul>
+              <li>v2.0.0 - 全新UI设计，优化侧边栏导航和页面交互体验</li>
+              <li>v1.9.0 - 新增算力中心模块，支持套餐切换和消耗明细</li>
+              <li>v1.8.0 - Boss管理上线，支持招聘流程管理</li>
+              <li>v1.7.0 - 企微聚合聊天功能正式发布</li>
+              <li>v1.6.0 - 个微聚合聊天优化，支持快捷回复和SOP</li>
+              <li>v1.5.0 - 新增地图获客功能，支持区域精准获客</li>
+              <li>v1.4.0 - 数字人精剪模块上线</li>
+              <li>v1.3.0 - 多场景剪辑支持更多模板</li>
+              <li>v1.2.0 - 形象定制功能发布</li>
+              <li>v1.1.0 - 智能获客模块升级</li>
+              <li>v1.0.0 - AiCrew平台正式上线</li>
+            </ul>
+          </div>
+          <button class="btn btn-primary">🔄 检查更新</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+<script>
+document.querySelectorAll('.settings-menu-item').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.settings-menu-item').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.setting-section').forEach(function(s){s.classList.remove('active')});
+    this.classList.add('active');
+    document.getElementById('tab-'+this.getAttribute('data-tab')).classList.add('active');
+  });
+});
+document.querySelectorAll('.toggle').forEach(function(t){
+  t.addEventListener('click',function(){this.classList.toggle('active')});
+});
+</script>
+<script src="../js/app.js"></script>
+</body>
+</html>
