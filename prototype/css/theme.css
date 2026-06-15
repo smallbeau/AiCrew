@@ -260,36 +260,7 @@ body::before {
   letter-spacing: -0.02em;
 }
 
-/* ══════════════════════════════════════════
-   Theme Switcher
-   ══════════════════════════════════════════ */
-.theme-switcher {
-  position: fixed; top: 16px; right: 16px; z-index: 999;
-  display: flex; align-items: center; gap: 6px;
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--border-glass);
-  border-radius: 30px;
-  padding: 6px 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-}
-.theme-btn {
-  width: 26px; height: 26px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-}
-.theme-btn:hover { transform: scale(1.15); }
-.theme-btn.active { border-color: var(--text-primary); box-shadow: 0 0 8px currentColor; }
-.theme-btn[data-set="neon-dark"]   { background: linear-gradient(135deg, #6366f1, #a855f7); }
-.theme-btn[data-set="ocean-blue"]  { background: linear-gradient(135deg, #0ea5e9, #22d3ee); }
-.theme-btn[data-set="sunset-warm"]{ background: linear-gradient(135deg, #f97316, #f43f5e); }
-.theme-btn[data-set="aurora-green"]{ background: linear-gradient(135deg, #10b981, #06d6a0); }
-.theme-btn[data-set="purple-haze"]{ background: linear-gradient(135deg, #a855f7, #818cf8); }
-.theme-btn[data-set="light"]      { background: linear-gradient(135deg, #f1f5f9, #e2e8f0); border: 1px solid #cbd5e1; }
-.theme-label { font-size: 0.65rem; color: var(--text-muted); white-space: nowrap; }
+/* Theme switcher moved to settings page */
 
 /* ══════════════════════════════════════════
    Glass Card
